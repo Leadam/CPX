@@ -22,7 +22,16 @@ matrix:
         packages:
         - gcc-4.8
         - g++-4.8
-        - gcov-4.9
+        #- gcov-4.9
         - clang-3.7
         - valgrind
 
+script:
+############################################################################
+# Build main and tests
+############################################################################
+- mkdir -p build
+- cd build
+- cmake ${CMAKE_OPTIONS} -DCMAKE_CXX_FLAGS=${CXX_FLAGS} -DCMAKE_BUILD_TYPE=Coverage -DCPX_ENABLE_TEST=ON ..
+- make
+- make test
