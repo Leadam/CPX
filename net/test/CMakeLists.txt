@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.2)
 file(GLOB NET_TEST_SRC *.cpp)
 set(TEST_NAME cpx_net_test)
 
+include_directories($GTEST_INCLUDE_DIR)
+
 add_executable(${TEST_NAME} ${NET_TEST_SRC})
 target_link_libraries(${TEST_NAME}
         gtest

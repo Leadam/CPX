@@ -5,7 +5,7 @@ set (CMAKE_CXX_STANDARD 11)
 
 option(CPX_ENABLE_TEST "Enable library test" ON)
 if(CPX_ENABLE_TEST)
-#    find_package(GTEST)
+    find_package(GTest REQUIRED)
 endif()
 
 
@@ -13,6 +13,9 @@ option(CPX_ENABLE_NET "Enable network extension library" ON)
 set(CPX_NET_DIR "net/src")
 set(CPX_NET_TEST_DIR "net/test")
 
+if(CPX_ENDABLE_TEST)
+    enable_testing()
+endif()
 
 if(CPX_ENABLE_NET)
     add_subdirectory(${CPX_NET_DIR})
