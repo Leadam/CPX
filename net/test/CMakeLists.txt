@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9.2)
+cmake_minimum_required(VERSION 3.2)
 
 file(GLOB NET_TEST_SRC *.cpp)
 set(TEST_NAME cpx_net_test)
