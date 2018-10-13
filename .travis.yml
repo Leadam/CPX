@@ -26,12 +26,18 @@ matrix:
         - clang-3.7
         - valgrind
 
+before_install:
+# Combine global build options with OS/compiler-dependent options
+- export CMAKE_OPTIONS=${CMAKE_OPTIONS}" "${ENV_CMAKE_OPTIONS}
+- export CXX_FLAGS=${CXX_FLAGS}" "${ENV_CXX_FLAGS}
+
+
 script:
 ############################################################################
 # Build main and tests
 ############################################################################
 - mkdir -p build
 - cd build
-- cmake ${CMAKE_OPTIONS} -DCMAKE_CXX_FLAGS=${CXX_FLAGS} -DCMAKE_BUILD_TYPE=Coverage -DCPX_ENABLE_TEST=ON ..
+- cmake ${CMAKE_OPTIONS} -DCMAKE_CXX_FLAGS=${CXX_FLAGS} -DCPX_ENABLE_TEST=ON ..
 - make
 - make test
