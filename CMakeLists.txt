@@ -6,6 +6,7 @@ set (CMAKE_CXX_STANDARD 11)
 option(CPX_ENABLE_TEST "Enable library test" ON)
 if(CPX_ENABLE_TEST)
     find_package(GTest REQUIRED)
+    find_package (Threads REQUIRED)
 endif()
 
 

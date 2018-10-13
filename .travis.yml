@@ -25,6 +25,7 @@ matrix:
         #- gcov-4.9
         - clang-3.7
         - valgrind
+        - libgtest-dev
 
 before_install:
 # Combine global build options with OS/compiler-dependent options

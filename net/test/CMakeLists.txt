@@ -7,8 +7,9 @@ include_directories($GTEST_INCLUDE_DIR)
 
 add_executable(${TEST_NAME} ${NET_TEST_SRC})
 target_link_libraries(${TEST_NAME}
-        gtest
-        gtest_main
+        ${GTEST_LIBRARY}
+        ${GTEST_MAIN_LIBRARY}
+        ${CMAKE_THREAD_LIBS_INIT}
         )
 
 
