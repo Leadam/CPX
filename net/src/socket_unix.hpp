@@ -105,7 +105,9 @@ namespace cpx {
 
             }
 
-            virtual ~Socket() = default;
+            virtual ~Socket(){
+                close();
+            }
         };
     }
 }
