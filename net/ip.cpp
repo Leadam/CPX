@@ -6,8 +6,16 @@
 #include "ip.hpp"
 namespace cpx {
     namespace net {
+        IpAddress::IpAddress(const char* address) {
+            _addr = inet_addr(address);
+        }
+
         IpAddress::IpAddress(const std::string &address) {
             _addr = inet_addr(address.c_str());
+        }
+
+        IpAddress::IpAddress(unsigned int address) : _addr(address){
+
         }
 
         IpAddress::IpAddress(char a, char b, char c, char d) {

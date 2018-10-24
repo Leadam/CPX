@@ -2,28 +2,31 @@
 // Created by lengyel on 2018.10.13..
 //
 
-#ifndef CEX_SOCKET_UNIX_HPP
-#define CEX_SOCKET_UNIX_HPP
+#ifndef CPX_SOCKET_UNIX_HPP
+#define CPX_SOCKET_UNIX_HPP
 #include <memory>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <stdexcept>
 #include <fcntl.h>
+#include "../core/except.hpp"
 
 namespace cpx {
     namespace net {
-        class Socket {
+        class CSocket {
         public:
             typedef int NativeSocket_t;
-            typedef std::shared_ptr<Socket> ptr_t;
+            typedef std::unique_ptr<CSocket> ptr_t;
         private:
             static const int INVALID_SOCKET = -1;
             NativeSocket_t _socket;
         public:
 
-            explicit Socket(NativeSocket_t socket) : _socket(socket) {}
+            explicit CSocket(NativeSocket_t socket) : _socket(socket) {}
 
-            Socket(int af, int type, int protocol) : _socket(::socket(af,type,protocol)){}
+            CSocket(int af, int type, int protocol) : _socket(::socket(af,type,protocol)){
+                if(!_socket) throwErrno<cpx::network_error>();
+            }
 
             inline NativeSocket_t accept(struct sockaddr *address, socklen_t *address_len) {
                 return ::accept(_socket, address, address_len);
@@ -90,7 +93,7 @@ namespace cpx {
                 ::close(_socket);
             }
 
-            void setBlocked(bool blocked){
+            inline void setBlocked(bool blocked){
                 long arg;
                 if((arg = fcntl(_socket, F_GETFL, NULL)) < 0)
                     throw std::runtime_error("Can not set socket blocking mode");
@@ -105,11 +108,11 @@ namespace cpx {
 
             }
 
-            virtual ~Socket(){
+            virtual ~CSocket(){
                 close();
             }
         };
     }
 }
 
-#endif //CEX_SOCKET_UNIX_HPP
+#endif //CPX_SOCKET_UNIX_HPP

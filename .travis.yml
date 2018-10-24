@@ -25,8 +25,7 @@ matrix:
         #- gcov-4.9
         - clang-3.7
         - valgrind
-install:
-- sudo apt-get install libgtest-dev
+        - libgtest-dev
 
 before_install:
 # Combine global build options with OS/compiler-dependent options

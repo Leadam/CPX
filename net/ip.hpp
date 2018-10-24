@@ -16,7 +16,13 @@ namespace cpx {
             };
 
         public:
-            explicit IpAddress(const std::string &address);
+            IpAddress() = default;
+
+            IpAddress(const char* address); //NOLINT
+
+            IpAddress(const std::string &address); //NOLINT
+
+            explicit IpAddress(unsigned int address);
 
             IpAddress(char a, char b, char c, char d);
 
